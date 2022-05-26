@@ -72,7 +72,12 @@ class MainMenuScene extends Phaser.Scene {
         audioManager.playEffect('impact', {
           seek: 1
         })
-        this.scene.start('StoryIntroScene', { gameInterface: gameInterface })
+        const skipLore = JSON.parse(localStorage.getItem('skipLore'))
+        if(skipLore && skipLore.rps === true) {
+            this.scene.start('CharacterSelectScene', { gameInterface: gameInterface })
+        }else {
+            this.scene.start('StoryIntroScene', { gameInterface: gameInterface })
+        }
       },
       () => { // On hover
         this.fistIndicator.setY(menuButtonLayout.y + menuButtonLayout.fistIndicatorYOffset)

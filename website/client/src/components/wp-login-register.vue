@@ -140,7 +140,12 @@ export default {
     },
     lpassword: function () {
       this.checkLoginCredentials()
-    }
+    },
+		loginSelected: function() {
+			this.$nextTick(() => {
+				document.querySelector('#email').focus()
+			})
+		}
   },
   computed: {
     loginBtnTooltip: function () {
@@ -235,7 +240,10 @@ export default {
       this.remail = this.prepopulatedEmail
       this.lemail = this.prepopulatedEmail
     }
-  }
+  },
+	mounted: function() {
+		document.querySelector('#email').focus()
+	}
 
 }
 

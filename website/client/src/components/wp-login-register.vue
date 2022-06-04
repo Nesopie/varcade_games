@@ -235,7 +235,10 @@ export default {
       this.remail = this.prepopulatedEmail
       this.lemail = this.prepopulatedEmail
     }
-  }
+  },
+	mounted: function() {
+		document.querySelector('#email').focus()
+	}
 
 }
 

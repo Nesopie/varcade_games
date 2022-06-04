@@ -140,7 +140,12 @@ export default {
     },
     lpassword: function () {
       this.checkLoginCredentials()
-    }
+    },
+		loginSelected: function() {
+			this.$nextTick(() => {
+				document.querySelector('#email').focus()
+			})
+		}
   },
   computed: {
     loginBtnTooltip: function () {

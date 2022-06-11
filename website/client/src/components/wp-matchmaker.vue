@@ -34,7 +34,7 @@
                                 <div class="col-4">
                                     <button type="button" 
                                             class="btn btn-custom btn-block" 
-                                            @click=joinGame(game.game_id)>
+                                            @click="joinGame(game.game_id)">
                                         Join Game
                                     </button>
                                 </div>
@@ -51,14 +51,16 @@
                     <div class="buttons row" style="padding: 1em;">
 
                       <div class="col">
-                        <button type="button" class="btn btn-custom btn-block" @click=createGame>Create Game</button>
+                        <button type="button" class="btn btn-custom btn-block" @click="createGame">Create Game</button>
                       </div>
 
                       <div class="col">
-                        <button type="button" class="btn btn-custom btn-block" @click=refreshGameList>Refresh Games</button>
+                        <button type="button" class="btn btn-custom btn-block" @click="refreshGameList">Refresh Games</button>
                       </div>
 
                     </div>
+
+                    <div class="row errorMessage" v-if="errorMessage">{{errorMessage}}</div>
 
                 </div>        
 
@@ -87,7 +89,8 @@
                 openGames: [
                 ],
                 icoPlayerVS: faUserCircle,
-                icoCloseModal: faTimes
+                icoCloseModal: faTimes,
+                errorMessage: null
             }
         },
         computed: {
@@ -130,6 +133,7 @@
             },
             
             createGame: function () {
+                this.errorMessage = null
                 this.matchmaker.createGame(
                     response => {
                         console.log(`Create game => ${response}`);
@@ -143,6 +147,7 @@
                         this.$modal.hide('matchmaker-modal');  
                     }, 
                     error => {
+                        this.errorMessage = error
                         console.log('Game creation failed => ' + error);
                     }
                 );
@@ -200,7 +205,10 @@
         padding: 2em;
         color: #c9c9c9;
         line-height: 20px;
-        box-shadow: 0px 0px 100px 5px #ff4848
+        box-shadow: 0px 0px 100px 5px #ff4848;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
     .title {
@@ -232,10 +240,17 @@
 
     .buttons {
         height: 100px;
-        margin-top: 2em;
+        display: flex;
+        align-items: flex-end;
     }
 
-
+    .errorMessage {
+        display: inline;
+        background-color: #ffcccc;
+        padding: 0.4rem;
+        color: black;
+        text-align: center;
+    }
 
 
 </style>

@@ -60,7 +60,7 @@
 
                     </div>
 
-                    <div class="row errorMessage" v-if="errorMessage">{{errorMessage}}</div>
+                    <div class="row error-message" v-if="errorMessage">{{errorMessage}}</div>
 
                 </div>        
 
@@ -244,7 +244,7 @@
         align-items: flex-end;
     }
 
-    .errorMessage {
+    .error-message {
         display: inline;
         background-color: #ffcccc;
         padding: 0.4rem;
